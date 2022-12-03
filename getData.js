@@ -21,7 +21,7 @@ fetch(`https://adventofcode.com/2022/day/${day}/input`, {
   "method": "GET",
 })
 .then(data => data.text())
-.then(data => data.split('\n'))
+.then(data => data.split('\n').filter(el => el))
 .then(data => {
   const dataStr = `
 const test = [
