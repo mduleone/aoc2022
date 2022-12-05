@@ -24,9 +24,8 @@ const computeFinalStacks9000 = (start, moveSet) => {
   for (moveIdx in moveSet) {
     const { quantity, from, to } = processMove(moveSet[moveIdx]);
 
-    for (let i = 0; i < quantity; i++) {
-      ret[to].push(ret[from].pop());
-    }
+    ret[to].push(...ret[from].slice(-quantity).reverse());
+    ret[from] = ret[from].slice(0, ret[from].length - quantity);
   }
 
   return ret;
@@ -38,13 +37,8 @@ const computeFinalStacks9001 = (start, moveSet) => {
   for (moveIdx in moveSet) {
     const { quantity, from, to } = processMove(moveSet[moveIdx]);
 
-    let temp = [];
-    for (let i = 0; i < quantity; i++) {
-      temp.push(ret[from].pop());
-    }
-    for (let i = 0; i < quantity; i++) {
-      ret[to].push(temp.pop());
-    }
+    ret[to].push(...ret[from].slice(-quantity));
+    ret[from] = ret[from].slice(0, ret[from].length - quantity);
   }
 
   return ret;
